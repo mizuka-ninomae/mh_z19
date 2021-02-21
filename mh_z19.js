@@ -1,14 +1,14 @@
   const SerialPort  = require('serialport');
-  let sdata        = this.sdata;
-  let rdata        = Buffer.alloc(0);
-  let co2_level    = 0;
-  let co2_detected = 0;
-  const port       = new SerialPort(this.uart_path, {
-                                    autoOpen: true,
-                                    baudRate: 9600,
-                                    dataBits: 8,
-                                    parity:   'none',
-                                    stopBits: 1
+  let sdata         = this.sdata;
+  let rdata         = Buffer.alloc(0);
+  let co2_level     = 0;
+  let co2_detected  = 0;
+  const port        = new SerialPort(this.uart_path, {
+                                     autoOpen: true,
+                                     baudRate: 9600,
+                                     dataBits: 8,
+                                     parity:   'none',
+                                     stopBits: 1
   });
 
   port.on("open", function() {
