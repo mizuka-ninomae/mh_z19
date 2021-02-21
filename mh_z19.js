@@ -18,15 +18,15 @@ class mh_z19 {
     });
       
     port.on("open", function () {
-      consorle.log("Co2Sensor SerialPort: Open");
-      consorle.log('Co2Sensor send data:    ', sdata);
+      console.log("Co2Sensor SerialPort: Open");
+      console.log('Co2Sensor send data:    ', sdata);
       port.write(sdata);
     }.bind(this));
 
     port.on("data", function (data) {
       rdata = Buffer.concat([rdata, data]);
       if (rdata.byteLength >= 9) {
-        consorle.log('Co2Sensor receive data: ', rdata);
+        console.log('Co2Sensor receive data: ', rdata);
         let adata    = new Uint8Array(rdata);
         co2_level    = adata[2]*256+adata[3];
         let checksum = (256-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]));
@@ -36,7 +36,7 @@ class mh_z19 {
           consorle.log('Co2Sensor Bad Checksum: ' + adata[8] + ' / ' + checksum)
         }
         port.close();
-        consorle.log("Co2Sensor SerialPort: Close");
+        console.log("Co2Sensor SerialPort: Close");
         if (warning_level = 0) {
         }
         else {
@@ -52,7 +52,7 @@ class mh_z19 {
     }.bind(this));
 
     port.on("error", function (err) {
-      consorle.log("Co2Sensor error");
+      console.log("Co2Sensor error");
       port.close();
       callback(err, co2_level, co2_detected);
     }.bind(this));
