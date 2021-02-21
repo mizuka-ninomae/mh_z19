@@ -1,3 +1,4 @@
+  const SerialPort  = require('serialport');
   let sdata        = this.sdata;
   let rdata        = Buffer.alloc(0);
   let co2_level    = 0;
