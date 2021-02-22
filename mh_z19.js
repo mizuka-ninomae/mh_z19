@@ -9,7 +9,7 @@ class MHZ19 {
                                       autoOpen: true,
                                       baudRate: 9600,
                                       dataBits: 8,
-                                      parity: 'none',
+                                      parity:   'none',
                                       stopBits: 1
     });
 
@@ -42,7 +42,7 @@ class MHZ19 {
       console.log ('MH-Z19 Co2Sensor receive data: ', rdata);
       console.log ("MH-Z19 Co2Sensor SerialPort: Close");
     }
-    let adata      = new Uint8Array (rdata);
+    let adata    = new Uint8Array (rdata);
     let checksum = ((255-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]))+1);
     if (adata[8] == checksum) {
     }
