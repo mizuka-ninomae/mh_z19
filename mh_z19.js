@@ -15,7 +15,7 @@ class MHZ19 {
                                       stopBits: 1
     });
 
-    port.on ("open", function() {
+    port.on ("open", function () {
       if (require.main === module) {
         console.log ("MH-Z19 Co2Sensor SerialPort: Open ('" + uart_path + "')");
         console.log ('MH-Z19 Co2Sensor send data:    ', sdata);
@@ -23,7 +23,7 @@ class MHZ19 {
       port.write (sdata);
     });
 
-    port.on ("data", function(data) {
+    port.on ("data", function (data) {
       rdata = Buffer.concat ([rdata, data]);
       if (rdata.byteLength >= 9) {
         if (require.main === module) {
@@ -54,13 +54,13 @@ class MHZ19 {
       }
     });
 
-    port.on ("error", function() {
+    port.on ("error", function () {
       port.close ();
       console.log ("MH-Z19 Co2Sensor SerialPort: error");
       return;
     });
 
-    port.on ("close", function() {
+    port.on ("close", function () {
       if (require.main === module) {
         console.log ("MH-Z19 Co2Sensor Co2_level: " + co2_level);
       }
