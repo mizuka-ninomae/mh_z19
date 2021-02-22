@@ -1,4 +1,3 @@
-
 const SerialPort   = require('serialport');
 const sdata        = Buffer.from([0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79]);
 let   rdata        = Buffer.alloc(0);
@@ -79,5 +78,5 @@ if (require.main === module) {
   let mh_z19 = new MHZ19 (process.argv[2]);
 }
 else {
-  module.exports = MHZ19;  
+  module.exports = MHZ19;
 }
