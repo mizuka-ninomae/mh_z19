@@ -1,8 +1,6 @@
-
 const SerialPort   = require('serialport');
 const sdata        = Buffer.from([0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79]);
 let   rdata        = Buffer.alloc(0);
-let   co2_level;
 
 class MHZ19 {
   constructor (uart) {
@@ -26,41 +24,38 @@ class MHZ19 {
     port.on ("data", function (data) {
       rdata = Buffer.concat ([rdata, data]);
       if (rdata.byteLength >= 9) {
-        if (require.main === module) {
-          console.log ('MH-Z19 Co2Sensor receive data: ', rdata);
-        }
-        let adata      = new Uint8Array (rdata);
-        co2_level      = adata[2]*256+adata[3];
-        let checksum   = (256-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]));
-        if (adata[8]  == checksum) {
-        }
-        else {
-          console.log ('MH-Z19 Co2Sensor Bad Checksum: ' + adata[8] + ' / ' + checksum)
-        }
         port.close ();
-        if (require.main === module) {
-          console.log ("MH-Z19 Co2Sensor SerialPort: Close");
-        }
       }
     });
 
-    port.on ("error", function () {
+    port.on ("error", function (err) {
       port.close ();
       console.log ("MH-Z19 Co2Sensor SerialPort: error");
-      return;
+      return err;
     });
 
-    port.on ("close", function () {
-      if (require.main === module) {
-        console.log ("MH-Z19 Co2Sensor Co2_level: " + co2_level);
-      }
-      return co2_level;
-    });
+    port.on ("close", this.co2Level);
+  }
+
+  co2Level () {
+    if (require.main === module) {
+      console.log ('MH-Z19 Co2Sensor receive data: ', rdata);
+      console.log ("MH-Z19 Co2Sensor SerialPort: Close");
+    }
+    let adata      = new Uint8Array (rdata);
+    let checksum = ((255-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]))+1);
+    if (adata[8] == checksum) {
+    }
+    else {
+      console.log ('MH-Z19 Co2Sensor Bad Checksum: ' + adata[8] + ' / ' + checksum)
+    }
+    return adata[2]*256+adata[3];
   }
 }
 
 if (require.main === module) {
   let mh_z19 = new MHZ19 (process.argv[2]);
+  console.log (mh_z19.co2Level);
 }
 else {
   module.exports = MHZ19;
