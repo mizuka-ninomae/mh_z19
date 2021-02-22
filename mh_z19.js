@@ -1,11 +1,11 @@
+
 const SerialPort   = require('serialport');
 const sdata        = Buffer.from([0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x79]);
 let   rdata        = Buffer.alloc(0);
 let   co2_level;
-let   co2_detected;
 
 class MHZ19 {
-  constructor (uart, warning_level = 0) {
+  constructor (uart) {
     const uart_path = "/dev/" + uart;
     const port      = new SerialPort (uart_path, {
                                       autoOpen: true,
@@ -41,16 +41,6 @@ class MHZ19 {
         if (require.main === module) {
           console.log ("MH-Z19 Co2Sensor SerialPort: Close");
         }
-        if (warning_level = 0) {
-        }
-        else {
-          if (warning_level > co2_level) {
-            co2_detected = 0;
-          }
-          else {
-            co2_detected = 1;
-          }
-        }
       }
     });
 
@@ -64,12 +54,7 @@ class MHZ19 {
       if (require.main === module) {
         console.log ("MH-Z19 Co2Sensor Co2_level: " + co2_level);
       }
-      if (warning_level = 0) {
-        return co2_level;
-      }
-      else {
-        return co2_detected;
-      }
+      return co2_level;
     });
   }
 }

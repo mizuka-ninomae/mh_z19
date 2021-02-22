@@ -1,7 +1,7 @@
 {
   "name": "mh_z19",
-  "displayName": "mh_z19",
   "version": "0.1.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "lint": "echo \"Warning: lint is not used\" && exit 0",
@@ -28,13 +28,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mizuka-ninomae/mh_z19.git"
+    "url": "git+https://github.com/mizuka-ninomae/mh_z19.git"
   },
   "author": "mizuka-ninomae",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mizuka-ninomae/mh_z19/issues"
   },
-  "homepage": "https://github.com/mizuka-ninomae/mh_z19#readme",
-  "description": ""
+  "homepage": "https://github.com/mizuka-ninomae/mh_z19#readme"
 }
