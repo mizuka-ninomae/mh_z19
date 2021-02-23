@@ -3,8 +3,7 @@ const sdata        = Buffer.from([0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00
 let   rdata        = Buffer.alloc(0);
 
 class MHZ19 {
-  constructor (uart, callback) {
-    const uart_path = "/dev/" + uart;
+  constructor (uart_path, callback) {
     const port      = new SerialPort (uart_path, {
                                       autoOpen: true,
                                       baudRate: 9600,
