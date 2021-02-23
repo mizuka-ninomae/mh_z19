@@ -1,35 +1,28 @@
 {
   "name": "mh_z19",
   "version": "0.1.2",
-  "description": "",
+  "description": "<p align=\"center\">\r   <img src=\"img/mhz19c_omote.png\" width=\"300\">\r </p>",
   "main": "index.js",
   "scripts": {
-    "lint": "echo \"Warning: lint is not used\" && exit 0",
-    "build": "echo \"Warning: build is not used\" && exit 0"
+    "test": "\"lint\": \"echo \\\"Warning: lint is not used\\\" && exit 0\",\"build\": \"echo \\\"Warning: build is not used\\\" && exit 0\""
   },
-  "engines": {
-    "node": ">=10.17.0",
-  },
-  "dependencies": {
-    "serialport": "^9.0.6",
-  },
-  "keywords": [
-    "MH-Z19",
-    "MH_Z19",
-    "MHZ19",
-    "MH-Z19B",
-    "MH_Z19B",
-    "MHZ19B",
-    "MH-Z19C",
-    "MH_Z19C",
-    "MHZ19C",
-    "CO2",
-    "sensor"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mizuka-ninomae/mh_z19.git"
   },
+  "keywords": [
+    "\"MH-Z19\"",
+    "\"MH_Z19\"",
+    "\"MHZ19\"",
+    "\"MH-Z19B\"",
+    "\"MH_Z19B\"",
+    "\"MHZ19B\"",
+    "\"MH-Z19C\"",
+    "\"MH_Z19C\"",
+    "\"MHZ19C\"",
+    "\"CO2\"",
+    "\"sensor\""
+  ],
   "author": "mizuka-ninomae",
   "license": "MIT",
   "bugs": {
