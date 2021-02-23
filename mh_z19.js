@@ -3,7 +3,7 @@ const sdata        = Buffer.from([0xFF, 0x01, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00
 let   rdata        = Buffer.alloc(0);
 
 class MHZ19 {
-  constructor (uart) {
+  constructor (uart, callback) {
     const uart_path = "/dev/" + uart;
     const port      = new SerialPort (uart_path, {
                                       autoOpen: true,
@@ -31,31 +31,24 @@ class MHZ19 {
     port.on ("error", function (err) {
       port.close ();
       console.log ("MH-Z19 Co2Sensor SerialPort: error");
-      return err;
+      callback (err, null);
     });
 
-    port.on ("close", this.co2Level);
-  }
-
-  co2Level () {
-    if (require.main === module) {
+    port.on ("close", function () {
+      if (require.main === module) {
       console.log ('MH-Z19 Co2Sensor receive data: ', rdata);
       console.log ("MH-Z19 Co2Sensor SerialPort: Close");
     }
-    let adata    = new Uint8Array (rdata);
-    let checksum = ((255-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]))+1);
-    if (adata[8] == checksum) {
-    }
-    else {
-      console.log ('MH-Z19 Co2Sensor Bad Checksum: ' + adata[8] + ' / ' + checksum)
-    }
-    return adata[2]*256+adata[3];
+      let adata    = new Uint8Array (rdata);
+      callback (null, adata[2]*256+adata[3]);
+    });
   }
 }
 
 if (require.main === module) {
-  let mh_z19 = new MHZ19 (process.argv[2]);
-  console.log (mh_z19.co2Level);
+  let mh_z19 = new MHZ19 (process.argv[2], function(error, co2_level){
+    console.log (co2_level);
+  });
 }
 else {
   module.exports = MHZ19;
