@@ -6,6 +6,8 @@
 
 このプラグインはhomebridgeを通して[MH-Z19](https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf)での二酸化炭素濃度計測結果をHomeKit上に表示する為のものです。（TThis plug-in is for displaying the carbon dioxide concentration measurement result of [MH-Z19](https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf) on HomeKit through homebridge.）
 
+`sudo mh_z19 <Serial port to Use>`
+
 ### テスト環境（Testing Environment）
 
 * Raspberry Pi 4 modelB 4GB（UART1、UART2、UART4）
