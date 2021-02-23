@@ -29,8 +29,7 @@ class MHZ19 {
 
     port.on ("error", function (err) {
       port.close ();
-      console.log ("MH-Z19 Co2Sensor SerialPort: error");
-      callback (err, null);
+      callback ("MH-Z19 Co2Sensor SerialPort: error", null, err);
     });
 
     port.on ("close", function () {
@@ -39,14 +38,22 @@ class MHZ19 {
       console.log ("MH-Z19 Co2Sensor SerialPort: Close");
     }
       let adata    = new Uint8Array (rdata);
-      callback (null, adata[2]*256+adata[3]);
+      let checksum = ((255-(adata[1]+adata[2]+adata[3]+adata[4]+adata[5]+adata[6]+adata[7]))+1);
+      if (adata[8] == checksum) {
+        callback (null, adata[2]*256+adata[3], null);
+      }
+      else {
+        callback ("MH-Z19 Co2Sensor Bad Checksum", adata[2]*256+adata[3], "Checksam value: " + adata[8] + " / Calculated value: " + checksum);
+      }
     });
   }
 }
 
 if (require.main === module) {
-  let mh_z19 = new MHZ19 (process.argv[2], function(error, co2_level){
+  let mh_z19 = new MHZ19 (process.argv[2], function(error, co2_level, stderr){
     console.log (co2_level);
+    console.log (error);
+    console.log (stderr);
   });
 }
 else {
