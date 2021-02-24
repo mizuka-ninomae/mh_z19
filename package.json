@@ -1,6 +1,6 @@
 {
   "name": "mh_z19",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "<p align=\"center\">\r   <img src=\"img/mhz19c_omote.png\" width=\"300\">\r </p>",
   "main": "index.js",
   "scripts": {
