@@ -7,6 +7,9 @@
 [MH-Z19](https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf)で二酸化炭素濃度を図るためのプログラムです。モジュールですが単体での起動が可能です。（This is a program for measuring carbon dioxide concentration with [MH-Z19](https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf) Although it is a module, it can be started by itself.）. 
 `sudo mh_z19 <Serial port to Use>`
 
+homebridge plugin についてはこちら
+https://www.npmjs.com/package/homebridge-co2-sensor
+
 ### テスト環境（Testing Environment）
 
 * Raspberry Pi 4 modelB 4GB（UART1、UART2、UART4）
